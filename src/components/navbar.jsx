@@ -1,4 +1,4 @@
-import navLinks from '../constants/index';
+import {navLinks} from '../constants/index';
 
 function Navbar(){
 
