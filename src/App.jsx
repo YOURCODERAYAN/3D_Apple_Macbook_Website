@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from 'react'
+import { useState, lazy, Suspense , useEffect} from 'react'
 
 import Navbar from './components/navbar'
 import Highlights from './components/Highlights.jsx'
@@ -26,6 +26,22 @@ function useSelection(initialvalue) {
 function App() {
   const size = useSelection(0.06)
   const color = useSelection('space-black')
+
+  useEffect(() => {
+    const handleLoad = () => {
+      ScrollTrigger.refresh()
+    }
+    window.addEventListener('load', handleLoad)
+    return () => window.removeEventListener('load', handleLoad)
+  }, [])
+
+  //  Fix 2 — refresh after delay as backup
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 2000)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <>
