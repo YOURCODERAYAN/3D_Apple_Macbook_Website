@@ -1,7 +1,6 @@
 import { useState, lazy, Suspense } from 'react'
 
 import Navbar from './components/navbar'
-import ShowCase from './components/Showcase'
 import Highlights from './components/Highlights.jsx'
 import Footer from './components/Footer.jsx'
 import gsap from 'gsap'
@@ -12,6 +11,7 @@ const Hero = lazy(() => import('./components/hero'))
 const ProductView = lazy(() => import('./components/product'))
 const Performance = lazy(() => import('./components/performance.jsx'))
 const Feature = lazy(() => import('./components/Features.jsx'))
+const Showcase = lazy(()=>import('./components/Showcase.jsx'))
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -50,12 +50,11 @@ function App() {
           sizeHook={size}
           colorHook={color}
         />
+          <ShowCase />
         <Performance />
         <Feature />
       </Suspense>
-
-      <ShowCase />
-      <Highlights />
+     <Highlights />
       <Footer />
     </>
   )
