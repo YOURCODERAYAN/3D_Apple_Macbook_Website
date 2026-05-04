@@ -1,4 +1,4 @@
-import { div } from "three/tsl";
+
 import  features from '../constants/features'
 import {Canvas} from '@react-three/fiber'
 import StudioLight from "./three/StudioLight";
@@ -60,6 +60,7 @@ useEffect(()=>{
                 end: '+=800',
                 scrub: 1,
                 pin: true,
+                pinSpacing:true,
 
                 //  only swap texture when video actually changes
                 onUpdate: (self) => {

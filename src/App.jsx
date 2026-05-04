@@ -11,7 +11,7 @@ const Hero = lazy(() => import('./components/hero'))
 const ProductView = lazy(() => import('./components/product'))
 const Performance = lazy(() => import('./components/performance.jsx'))
 const Feature = lazy(() => import('./components/Features.jsx'))
-const ShowCase = lazy(()=>import('./components/Showcase.jsx'))
+const Showcase = lazy(()=>import('./components/Showcase.jsx'))
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -50,7 +50,7 @@ function App() {
           sizeHook={size}
           colorHook={color}
         />
-          <ShowCase />
+          <Showcase />
         <Performance />
         <Feature />
       </Suspense>
