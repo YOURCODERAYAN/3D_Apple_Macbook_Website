@@ -38,8 +38,8 @@ const ModelScroll = () => {
         const modelTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '#features',
-                start: 'top 100%',
-                end:'+=100vh',
+                start: 'top top',
+                end: 'bottom  top',
                 scrub: 1,
                 pin: true,
             }
@@ -49,15 +49,15 @@ const ModelScroll = () => {
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '#features',
-                start: 'top 100%',
-                end: '+=100vh',
+                start: 'top center',
+                end: 'bottom  top',
                 scrub: 1,
             }
         })
 
         // 3D SPIN
         if(groupRef.current) {
-            modelTimeline.to(groupRef.current.rotation, { y: Math.PI * 3, ease: 'none'})
+            modelTimeline.to(groupRef.current.rotation, { y: Math.PI * 2, ease: 'power1.inOut'})
         }
 
         // Content & Texture Sync
