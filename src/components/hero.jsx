@@ -8,11 +8,21 @@ function Hero(){
     
     useEffect(()=>{
 
-        if(videoRef.current){
+    const video = videoRef.current
+        if(!video) return
+    
+    
+    
+            
 
-            videoRef.current.playbackRate=2;
+            const handleReady = () => {
+      video.playbackRate = 1
+    }
 
-        } 
+    video.addEventListener('loadedmetadata', handleReady)
+    return () => video.removeEventListener('loadedmetadata', handleReady)
+
+        
     },[])
 
         return(
@@ -26,7 +36,7 @@ function Hero(){
                 </div>
 
                 <div>
-                        <video  ref={videoRef} src="/videos/hero.mp4" autoPlay muted playsInline />
+                        <video  ref={videoRef} src="/videos/hero.mp4" autoPlay muted playsInline preload='none'  poster='/macbook_img.png' />
                 </div>
 
 
