@@ -61,7 +61,7 @@ useEffect(()=>{
                 scrub: 1,
                 pin: true,
 
-                // ✅ only swap texture when video actually changes
+                //  only swap texture when video actually changes
                 onUpdate: (self) => {
                     const p = self.progress
 
@@ -72,7 +72,7 @@ useEffect(()=>{
                     else if (p < 0.9)  newTexture = '/videos/feature-4.mp4'
                     else               newTexture = '/videos/feature-5.mp4'
 
-                    // ✅ only call setTexture if video actually changed
+                    //  only call setTexture if video actually changed
                     if (newTexture !== currentTexture.current) {
                         currentTexture.current = newTexture
                         setTexture(newTexture)
@@ -81,7 +81,7 @@ useEffect(()=>{
             }
         })
 
-        // ✅ rotation spans full timeline
+        //  rotation spans full timeline
         if (grpRef.current) {
             tl.to(grpRef.current.rotation, {
                 y: Math.PI * 6,
@@ -90,23 +90,23 @@ useEffect(()=>{
             }, 0)
         }
 
-        // ✅ box1 — 0 to 0.2
+        //  box1 — 0 to 0.2
         tl.to('.box1', { opacity: 1, y: 0 }, 0)
         tl.to('.box1', { opacity: 0, y: -40 }, 0.2)
 
-        // ✅ box2 — 0.25 to 0.45
+        //  box2 — 0.25 to 0.45
         tl.to('.box2', { opacity: 1, y: 0 }, 0.25)
         tl.to('.box2', { opacity: 0, y: -40 }, 0.45)
 
-        // ✅ box3 — 0.5 to 0.65
+        //  box3 — 0.5 to 0.65
         tl.to('.box3', { opacity: 1, y: 0 }, 0.5)
         tl.to('.box3', { opacity: 0, y: -40 }, 0.65)
 
-        // ✅ box4 — 0.7 to 0.85
+        //  box4 — 0.7 to 0.85
         tl.to('.box4', { opacity: 1, y: 0 }, 0.7)
         tl.to('.box4', { opacity: 0, y: -40 }, 0.85)
 
-        // ✅ box5 — stays till end
+        //  box5 — stays till end
         tl.to('.box5', { opacity: 1, y: 0 }, 0.9)
 
     }, [])

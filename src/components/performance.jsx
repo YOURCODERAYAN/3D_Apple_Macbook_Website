@@ -22,8 +22,8 @@ const imageRef = useRef([]);
         // Step - 1 
         gsap.set(images , {
 
-            x:0,
-            y:0,
+            xPercent:'-50',
+            yPercent:'-50',
             opacity:1,
             rotation:0,
             scale:1
@@ -34,6 +34,7 @@ const imageRef = useRef([]);
         // Step -2 
 
         const position =[
+            /*
         { x: -500, y: -250, scale: 0.7, rotate: -15 }, // left
   { x: 650, y: 150, scale: 0.75, rotate: 12 },  // 👉 pushed more right
   { x: -600, y: 200, scale: 0.65, rotate: 8 },   // left
@@ -41,7 +42,48 @@ const imageRef = useRef([]);
   { x: 0, y: 0, scale: 1.2, rotate: 0 },         // center
   { x: -300, y: 350, scale: 0.8, rotate: -6 },   // left-bottom
   { x: 600, y: -100, scale: 0.85, rotate: 5 }  
+   */
+  /*
+  { x: -200, y: -150, scale: 0.7, rotate: -15 },
+  { x: 200,  y: 100,  scale: 0.75, rotate: 12 },
+  { x: -200, y: 150,  scale: 0.65, rotate: 8  },
+  { x: 150,  y: 250,  scale: 0.7,  rotate: -10 },
+  { x: 0,    y: 0,    scale: 1.2,  rotate: 0  },
+  { x: -150, y: 200,  scale: 0.8,  rotate: -6 },
+  { x: 200,  y: -80,  scale: 0.85, rotate: 5  }
+   
+*/
+    { x: -400, y: -300, scale: 0.7,  rotate: -15 },
+  { x: 400,  y: -300,  scale: 0.7, rotate: 12  },
+  { x: -350, y: 300,  scale: 0.65, rotate: 8   },
+  { x: 400,  y: 350,  scale: 0.7,  rotate: -10 },
+  { x: 0,    y: 0,    scale: 1.2,  rotate: 0   },
+  { x: -280, y: 200,  scale: 0.8,  rotate: -6  },
+  { x: 380,  y: -100,  scale: 0.85, rotate: 5   }
+
+
         ];
+
+
+
+
+    /*
+    const position = [
+  { x: -200, y: -150, scale: 0.7, rotate: -15 },
+  { x: 200,  y: 100,  scale: 0.75, rotate: 12 },
+  { x: -200, y: 150,  scale: 0.65, rotate: 8  },
+  { x: 150,  y: 250,  scale: 0.7,  rotate: -10 },
+  { x: 0,    y: 0,    scale: 1.2,  rotate: 0  },
+  { x: -150, y: 200,  scale: 0.8,  rotate: -6 },
+  { x: 200,  y: -80,  scale: 0.85, rotate: 5  }
+]
+
+
+
+
+
+
+    */
 
 
 
@@ -56,7 +98,7 @@ const imageRef = useRef([]);
             end: '+=150%',
             scrub:1,
 
-            markers:true
+           
         }
     });
 
@@ -78,7 +120,7 @@ const imageRef = useRef([]);
                     y:0,
                     scale:1.2,
                     rotation:0,
-                    zIndex:100,
+                    zIndex:0,
                     duration:2
                     
                 },
@@ -93,7 +135,7 @@ const imageRef = useRef([]);
                     y:pos.y,
                     scale:pos.scale,
                     rotation:pos.rotation,
-                    zIndex:9,
+                    zIndex:10,
                     duration:7,
                     ease:'power3.out'
                 },
