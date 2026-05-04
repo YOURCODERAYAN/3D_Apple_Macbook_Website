@@ -38,7 +38,7 @@ const ModelScroll = () => {
         const modelTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '#features',
-                start: 'top top',
+                start: 'top 100%',
                 end:'+=100vh',
                 scrub: 1,
                 pin: true,
@@ -49,7 +49,7 @@ const ModelScroll = () => {
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '#features',
-                start: 'top top',
+                start: 'top 100%',
                 end: '+=100vh',
                 scrub: 1,
             }
