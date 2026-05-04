@@ -853,8 +853,9 @@ header nav ul a:hover {
 }
 
 #features {
-  padding-top: 10rem;
+  height:100vh;
   position: relative;
+  overflow:hidden;
 }
 
 #features h2 {
@@ -887,11 +888,8 @@ header nav ul a:hover {
 }
 
 #features #f-canvas {
-  width: 100% !important;
-  height: 100dvh !important;
-  position: absolute;
-  z-index: 1;
-  inset:0;
+  width: 100%;
+  height: 100%;
 }
 
 #features .box {
