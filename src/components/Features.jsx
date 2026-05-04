@@ -1,154 +1,116 @@
-import features from '../constants/features'
-import { Canvas } from '@react-three/fiber'
-import StudioLight from "./three/StudioLight";
-import clsx from 'clsx';
-import { Suspense, useRef, useEffect } from 'react';
-import { Html } from '@react-three/drei'
-import MacbookModel from "./models/Macbook";
-import useMacbookStore from "../constants/MacbookStore";
-import { useMediaQuery } from "react-responsive";
-import { useGSAP } from '@gsap/react'
+import {Canvas} from "@react-three/fiber";
+import StudioLight from "./three/StudioLight.jsx";
+import features from "../constants/features.js";
+import feature2 from "../constants/feature2.js";
+import clsx from "clsx";
+import {Suspense, useEffect, useRef} from "react";
+import {Html} from "@react-three/drei";
+import MacbookModel from "./models/Macbook.jsx";
+import {useMediaQuery} from "react-responsive";
+import useMacbookStore from "../constants/MacbookStore.js";
+import {useGSAP} from "@gsap/react";
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/all'
-import featureSequence from "../constants/feature2";
-
-gsap.registerPlugin(ScrollTrigger)
 
 const ModelScroll = () => {
-  const grpRef = useRef()
-  const isMobile = useMediaQuery({ query: '(max-width:1024px)' })
-  const { setTexture } = useMacbookStore();
+    const groupRef = useRef(null);
+    const isMobile = useMediaQuery({ query: '(max-width: 1024px)'})
+    const { setTexture } = useMacbookStore();
 
-  useEffect(() => {
-    featureSequence.forEach((feature) => {
-      const v = document.createElement('video')
+    // Pre-load all feature videos during component mount
+    useEffect(() => {
+        feature2.forEach((feature) => {
+            const v = document.createElement('video');
 
-      Object.assign(v, {
-        src: feature.videoPath,
-        muted: true,
-        playsInline: true,
-        preload: 'auto',
-        crossOrigin: 'anonymous',
-      })
+            Object.assign(v, {
+                src: feature.videoPath,
+                muted: true,
+                playsInline: true,
+                preload: 'auto',
+                crossOrigin: 'anonymous',
+            });
 
-      v.load()
-    })
-  }, [])
+            v.load();
+        })
+    }, []);
 
-  const currentTexture = useRef('/videos/feature-1.mp4')
+    useGSAP(() => {
+        // 3D MODEL ROTATION ANIMATION
+        const modelTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#features',
+                start: 'top top',
+                end: 'bottom  top',
+                scrub: 1,
+                pin: true,
+            }
+        });
 
-  useGSAP(() => {
+        // SYNC THE FEATURE CONTENT
+        const timeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#features',
+                start: 'top center',
+                end: 'bottom  top',
+                scrub: 1,
+            }
+        })
 
-    gsap.set(['.box1', '.box2', '.box3', '.box4', '.box5'], {
-      opacity: 0,
-      y: 40
-    })
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#features',
-        start: 'top top',
-
-        // ✅ FIXED
-        end: '+=100vh',
-
-        scrub: 1,
-        pin: true,
-
-        // ✅ CRITICAL FIXES
-        pinSpacing: true,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        pinType: "transform",
-
-        onUpdate: (self) => {
-          const p = self.progress
-
-          let newTexture
-          if (p < 0.25) newTexture = '/videos/feature-1.mp4'
-          else if (p < 0.5) newTexture = '/videos/feature-2.mp4'
-          else if (p < 0.7) newTexture = '/videos/feature-3.mp4'
-          else if (p < 0.9) newTexture = '/videos/feature-4.mp4'
-          else newTexture = '/videos/feature-5.mp4'
-
-          if (newTexture !== currentTexture.current) {
-            currentTexture.current = newTexture
-            setTexture(newTexture)
-          }
+        // 3D SPIN
+        if(groupRef.current) {
+            modelTimeline.to(groupRef.current.rotation, { y: Math.PI * 2, ease: 'power1.inOut'})
         }
-      }
-    })
 
-    if (grpRef.current) {
-      tl.to(grpRef.current.rotation, {
-        y: Math.PI * 6,
-        ease: 'none',
-        duration: 1
-      }, 0)
-    }
+        // Content & Texture Sync
+        timeline
+            .call(() => setTexture('/videos/feature-1.mp4'))
+            .to('.box1', { opacity: 1, y: 0, delay: 1 })
 
-    tl.to('.box1', { opacity: 1, y: 0 }, 0)
-    tl.to('.box1', { opacity: 0, y: -40 }, 0.2)
+            .call(() => setTexture('/videos/feature-2.mp4'))
+            .to('.box2', { opacity: 1, y: 0 })
 
-    tl.to('.box2', { opacity: 1, y: 0 }, 0.25)
-    tl.to('.box2', { opacity: 0, y: -40 }, 0.45)
+            .call(() => setTexture('/videos/feature-3.mp4'))
+            .to('.box3', { opacity: 1, y: 0 })
 
-    tl.to('.box3', { opacity: 1, y: 0 }, 0.5)
-    tl.to('.box3', { opacity: 0, y: -40 }, 0.65)
+            .call(() => setTexture('/videos/feature-4.mp4'))
+            .to('.box4', { opacity: 1, y: 0})
 
-    tl.to('.box4', { opacity: 1, y: 0 }, 0.7)
-    tl.to('.box4', { opacity: 0, y: -40 }, 0.85)
+            .call(() => setTexture('/videos/feature-5.mp4'))
+            .to('.box5', { opacity: 1, y: 0 })
+    }, []);
 
-    tl.to('.box5', { opacity: 1, y: 0 }, 0.9)
-
-  }, [])
-
-  return (
-    <group ref={grpRef}>
-      <Suspense fallback={<Html><h1>Loading....</h1></Html>}>
-        <MacbookModel
-          scale={isMobile ? 0.6 : 0.9}     // ✅ FIXED
-          position={[0, -0.3, 0]}          // ✅ FIXED
-        />
-      </Suspense>
-    </group>
-  )
+    return (
+        <group ref={groupRef}>
+            <Suspense fallback={<Html><h1>Loading...</h1></Html>}>
+                <MacbookModel scale={isMobile ? 0.05 : 0.1} position={[0, -1, 0]} />
+            </Suspense>
+        </group>
+    )
 }
 
-function Feature() {
-  return (
-    <section id="features">
+const Features = () => {
+    return (
+        <section id="features">
+            <h2>See it all in a new light.</h2>
 
-      <h2>See it all in a new light.</h2>
+            <Canvas id="f-canvas" camera={{}}>
+                <StudioLight />
+                <ambientLight intensity={0.5} />
+                <ModelScroll />
+            </Canvas>
 
-      <div className="canvas-wrapper">
-        <Canvas
-          id="f-canvas"
-          camera={{ position: [0, 0, 2.5], fov: 40 }}   // ✅ FIXED
-        >
-          <StudioLight />
-          <ambientLight intensity={0.5} />
-          <ModelScroll />
-        </Canvas>
-      </div>
-
-      <div className="hello">
-        {features.map((feature, index) => (
-          <div
-            key={index}
-            className={clsx('box', `box${index + 1}`, feature.styles)}
-          >
-            <img src={feature.icon} alt={feature.highlight} />
-            <p>
-              <span>{feature.highlight}</span>
-              {feature.text}
-            </p>
-          </div>
-        ))}
-      </div>
-
-    </section>
-  )
+            <div>
+                {features.map((feature, index) => (
+                    <div key={feature.id} className={clsx('box', `box${index + 1}`, feature.styles)}>
+                        <img src={feature.icon} alt={feature.highlight} />
+                        <p>
+                            <span>{feature.highlight}</span>
+                            {feature.text}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </section>
+    )
 }
 
-export default Feature;
+export default Features
