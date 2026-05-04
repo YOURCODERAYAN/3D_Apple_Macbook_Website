@@ -57,7 +57,7 @@ const ModelScroll = () => {
 
         // 3D SPIN
         if(groupRef.current) {
-            modelTimeline.to(groupRef.current.rotation, { y: Math.PI * 2, ease: 'power1.inOut'})
+            modelTimeline.to(groupRef.current.rotation, { y: Math.PI * 6, ease: 'power1.inOut'})
         }
 
         // Content & Texture Sync
