@@ -43,11 +43,11 @@ useEffect(()=>{
 
 },[])
 
- const currentTexture = useRef('/videos/feature-1.mp4') // ✅ tracks current video
+ const currentTexture = useRef('/videos/feature-1.mp4') //  tracks current video
 
     useGSAP(() => {
 
-        // ✅ set initial states
+        //  set initial states
         gsap.set(['.box1', '.box2', '.box3', '.box4', '.box5'], {
             opacity: 0,
             y: 40
