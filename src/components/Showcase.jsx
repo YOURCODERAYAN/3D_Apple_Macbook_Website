@@ -11,7 +11,7 @@ function Switch(){
 
     useGSAP(() => {
         gsap.set('.media' ,{overflow:'hidden'})
-        // ✅ Set initial states via GSAP — not CSS
+        //  Set initial states via GSAP — not CSS
         gsap.set('.mask img', { scale: 50 })        // starts huge (replaces matrix(80...))
        gsap.set('.content', { opacity: 0, y: 40 }) // starts hidden
 
@@ -19,7 +19,7 @@ function Switch(){
             scrollTrigger: {
                 trigger: '#showcase',
                 start: 'top top',
-                end: '+=1500',           // ✅ use pixel distance, not 'bottom top'
+                end: '+=1500',           //  use pixel distance, not 'bottom top'
                 scrub: 1,
                 pin: true,
             }
@@ -30,7 +30,7 @@ function Switch(){
             ease: 'none'
         })
 
-        // ✅ Step 2: content fades up after mask animation
+        //  Step 2: content fades up after mask animation
         timeline.to('.content', {
             opacity: 1,
             y: 0,
@@ -54,7 +54,7 @@ function Switch(){
                 <div className='media'>
 
 
-                    <video className='game-video' src={game}  loop muted autoPlay playsInline/>
+                    <video className='game-video' src={game}  loop muted autoPlay playsInline preload='none'/>
 
                 <div className='mask'>
                     <img src={mac} alt="mask-image"/>

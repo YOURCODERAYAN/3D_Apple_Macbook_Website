@@ -720,7 +720,6 @@ header nav ul a:hover {
   position:absolute;
   top:50%;
   left:50%;
-  transform: translate(-50% , -50%);
   will-change: transform;
 }
 
@@ -1200,7 +1199,7 @@ header nav ul a:hover {
 
 footer {
   width: 100vw;
-  max-width:1900px;
+  max-width:1700px;
   margin: 0 auto;
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
@@ -1271,7 +1270,7 @@ footer .links ul {
     flex-direction: row;
   }
   footer .links ul li:not(:first-child) {
-    border-left: 1px solid;
+    border-left: none;
   }
 }
 
