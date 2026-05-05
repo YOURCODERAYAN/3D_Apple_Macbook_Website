@@ -61,14 +61,18 @@ function App() {
 
       <Suspense fallback={
         <div style={{
-          width: '100vw',
-          height: '100vh',
+          width: '100%',
+          minHeight: '100vh',
           background: '#000',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: 'white',
-          fontSize: '1.5rem'
+          fontSize: '1.5rem',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          zIndex: 9999
         }}>
           Loading...
         </div>
