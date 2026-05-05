@@ -899,8 +899,8 @@ header nav ul a:hover {
 
 /* ========== CANVAS ELEMENT ========== */
 #features #f-canvas {
-  width: 70rem;
-  height: 10 rem;
+  width: 100%;
+  height: 100vh;
   display: block;
 }
 
