@@ -35,12 +35,24 @@ function App() {
     return () => window.removeEventListener('load', handleLoad)
   }, [])
 
-  //  Fix 2 — refresh after delay as backup
+  // Refresh ScrollTrigger multiple times to account for 3D model loading
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timers = [
+      setTimeout(() => ScrollTrigger.refresh(), 500),
+      setTimeout(() => ScrollTrigger.refresh(), 1000),
+      setTimeout(() => ScrollTrigger.refresh(), 2000),
+      setTimeout(() => ScrollTrigger.refresh(), 4000)
+    ]
+    return () => timers.forEach(timer => clearTimeout(timer))
+  }, [])
+
+  // Listen for 3D model render completions
+  useEffect(() => {
+    const handleModelReady = () => {
       ScrollTrigger.refresh()
-    }, 2000)
-    return () => clearTimeout(timer)
+    }
+    window.addEventListener('modelReady', handleModelReady)
+    return () => window.removeEventListener('modelReady', handleModelReady)
   }, [])
 
   return (
