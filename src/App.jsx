@@ -35,15 +35,12 @@ function App() {
     return () => window.removeEventListener('load', handleLoad)
   }, [])
 
-  // Refresh ScrollTrigger multiple times to account for 3D model loading
+  // Refresh ScrollTrigger after components mount
   useEffect(() => {
-    const timers = [
-      setTimeout(() => ScrollTrigger.refresh(), 500),
-      setTimeout(() => ScrollTrigger.refresh(), 1000),
-      setTimeout(() => ScrollTrigger.refresh(), 2000),
-      setTimeout(() => ScrollTrigger.refresh(), 4000)
-    ]
-    return () => timers.forEach(timer => clearTimeout(timer))
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 1500)
+    return () => clearTimeout(timer)
   }, [])
 
   // Listen for 3D model render completions
@@ -62,17 +59,13 @@ function App() {
       <Suspense fallback={
         <div style={{
           width: '100%',
-          minHeight: '100vh',
+          height: '100vh',
           background: '#000',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: 'white',
-          fontSize: '1.5rem',
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          zIndex: 9999
+          fontSize: '1.5rem'
         }}>
           Loading...
         </div>

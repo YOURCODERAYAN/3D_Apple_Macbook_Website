@@ -6,21 +6,25 @@ import App from './App.jsx'
 window.history.scrollRestoration = 'manual'
 
 // Prevent scrolling during initial load
-document.documentElement.style.scrollBehavior = 'auto'
-const originalOverflow = document.body.style.overflow
-document.body.style.overflow = 'hidden'
+let scrollDisabled = true
+const preventDefault = (e) => scrollDisabled && e.preventDefault()
+
+window.addEventListener('wheel', preventDefault, { passive: false })
+window.addEventListener('touchmove', preventDefault, { passive: false })
 
 // Allow scrolling once the app is mounted
 window.addEventListener('load', () => {
-  document.body.style.overflow = originalOverflow
-  document.documentElement.style.scrollBehavior = 'smooth'
+  scrollDisabled = false
+  window.removeEventListener('wheel', preventDefault)
+  window.removeEventListener('touchmove', preventDefault)
 }, { once: true })
 
-// Fallback: allow scrolling after 3 seconds if load event doesn't fire
+// Fallback: allow scrolling after 2 seconds
 setTimeout(() => {
-  document.body.style.overflow = originalOverflow
-  document.documentElement.style.scrollBehavior = 'smooth'
-}, 3000)
+  scrollDisabled = false
+  window.removeEventListener('wheel', preventDefault)
+  window.removeEventListener('touchmove', preventDefault)
+}, 2000)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
