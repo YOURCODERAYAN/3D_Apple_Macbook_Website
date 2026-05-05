@@ -1,4 +1,4 @@
-import game from '/videos/MAIN.mp4'
+import game from '/videos/game.mp4'
 import mac from '/mask-logo.svg'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
