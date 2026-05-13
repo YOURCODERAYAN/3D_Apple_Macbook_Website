@@ -1,1 +1,20 @@
-<img width="1896" height="907" alt="image" src="https://github.com/user-attachments/assets/ba60f068-9fce-413d-b943-077e70d5a4e1" />
+# MacBook 3D Website Practice
+
+A Three.js + React Three Fiber practice project focused on:
+- 3D model rendering
+- camera controls
+- lighting
+- scroll-based interactions
+- basic scene composition
+
+## Tech Stack
+- React
+- Three.js
+- React Three Fiber
+- GSAP
+
+## Purpose
+This project was built for learning and experimenting with 3D web experiences and animations.
+
+## Status
+Practice / Experimental Project
